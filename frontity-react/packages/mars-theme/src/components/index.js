@@ -6,6 +6,7 @@ import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
+import {HomePage} from "./homePage";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -18,7 +19,7 @@ import PageError from "./page-error";
 const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
-
+console.log("Data: ", data);
   return (
     <>
       {/* Add some metatags to the <head> of the HTML. */}
@@ -28,7 +29,7 @@ const Theme = ({ state }) => {
         <html lang="en" />
       </Head>
 
-      {/* Add some global styles for the whole site, like body or a's. 
+      {/* Add some global styles for the whole site, like body or a's.
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
       <Global styles={globalStyles} />
 
@@ -42,6 +43,7 @@ const Theme = ({ state }) => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
+            <HomePage when={data.isFetching}/>
           <List when={data.isArchive} />
           <Post when={data.isPostType} />
           <PageError when={data.isError} />
@@ -70,7 +72,7 @@ const HeadContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #1f38c5;
+  background-color: #151515;
 `;
 
 const Main = styled.div`
